@@ -1,0 +1,68 @@
+																	/*REGISTROS*/
+
+/*EMPLEADOS*/
+INSERT INTO empleados (nombres, apellidos, dni, tipo, sueldo, direccion)
+VALUES 
+('Rodrigo', 'Torres', '70365510', 'Administrador', 5000, 'rodrigofk@gmail.com'),
+('Sofía', 'Lopez', '72115203', 'Vendedor', 1500, 'soifa_lopez@gmail.com'),
+('Carlos', 'Perez', '70454010', 'Vendedor', 1500, 'carlosPerez14@gmail.com');
+
+SELECT*FROM empleados
+
+/*******************************************************************************************/
+/*CATEGORIAS*/
+INSERT INTO categorias (nombre)
+VALUES 
+('Electrónicos'),
+('Ropa'),
+('Hogar'),
+('Juguetes'),
+('Deportes');
+
+SELECT*FROM categorias
+
+/*******************************************************************************************/
+/*CLIENTES*/
+INSERT INTO clientes (nombres, apellidos, dni, correo, direccion)
+VALUES 
+('Ana', 'García Pérez', '12345678', 'ana@email.com', 'Calle 123, Ciudad'),
+('Juan', 'Martínez López', '23456789', 'juan@email.com', 'Avenida Principal, Pueblo'),
+('María', 'Rodríguez Gómez', '34567890', 'maria@email.com', 'Carrera 45, Villa'),
+('Carlos', 'Sánchez Hernández', '45678901', 'carlos@email.com', 'Callejón 67, Aldea'),
+('Luisa', 'Fernández Martínez', '56789012', 'luisa@email.com', 'Paseo 89, Pueblo Nuevo'),
+('Pedro', 'Gómez Rodríguez', '67890123', 'pedro@email.com', 'Avenida 10, Ciudad Vieja'),
+('Laura', 'López García', '78901234', 'laura@email.com', 'Calle 23, Pueblo Nuevo'),
+('Miguel', 'Hernández Sánchez', '89012345', 'miguel@email.com', 'Carrera 56, Villa Rica'),
+('Isabel', 'Martínez García', '90123456', 'isabel@email.com', 'Avenida 78, Aldea Feliz'),
+('Pablo', 'García López', '01234567', 'pablo@email.com', 'Calle 90, Ciudad Nueva');
+
+SELECT*FROM clientes
+
+/*********************************************************************************************/
+/*PRODUCTOS*/
+INSERT INTO productos (nombre, precio, stock, idCategoria)
+VALUES 
+('Laptop HP', 799.99, 50, 1),
+('Camiseta Nike', 29.99, 100, 2),
+('Sofá Reclinable', 499.99, 20, 3),
+('Smartphone Samsung', 699.99, 30, 1),
+('Zapatillas Adidas', 79.99, 80, 2),
+('Mesa de Centro', 149.99, 15, 3),
+('Cámara Canon', 499.99, 40, 1),
+('Jeans Levis', 49.99, 60, 2),
+('Refrigeradora LG', 999.99, 10, 3),
+('Altavoces Bluetooth', 89.99, 50, 4);
+
+SELECT*FROM productos
+
+/**********************************************************************************************/
+/*VENTAS*/
+INSERT INTO ventas (cantidad, fechaVenta, PrecioTotal, idCliente, idProducto)
+VALUES 
+(3, '2023-11-12', 150.00, 1, 1),
+(2, '2023-11-13', 50.00, 2, 4),
+(5, '2023-11-14', 200.00, 3, 7),
+(1, '2023-11-15', 60.00, 4, 10),
+(4, '2023-11-16', 120.00, 5, 3);
+
+SELECT*FROM ventas

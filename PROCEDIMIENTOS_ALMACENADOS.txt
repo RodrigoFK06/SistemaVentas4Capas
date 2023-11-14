@@ -1,0 +1,219 @@
+													/*PROCEDIMIENTOS ALMACENADOS*/
+
+											/*Procedimientos Almacenados para Empleados*/
+
+/******************************************************************************/
+/*Insertar Empleado*/
+CREATE PROCEDURE sp_InsertarEmpleado
+    @nombres VARCHAR(50),
+    @apellidos VARCHAR(50),
+    @dni CHAR(8),
+    @tipo VARCHAR(20),
+    @sueldo INT,
+    @direccion VARCHAR(200)
+AS
+BEGIN
+    INSERT INTO empleados (nombres, apellidos, dni, tipo, sueldo, direccion)
+    VALUES (@nombres, @apellidos, @dni, @tipo, @sueldo, @direccion);
+END;
+/******************************************************************************/
+/*Mostrar Empleados*/
+CREATE PROCEDURE sp_MostrarEmpleados
+AS
+BEGIN
+    SELECT * FROM empleados;
+END;
+/******************************************************************************/
+/*Editar Empleado*/
+CREATE PROCEDURE sp_EditarEmpleado
+    @idEmpleado INT,
+    @nombres VARCHAR(50),
+    @apellidos VARCHAR(50),
+    @dni CHAR(8),
+    @tipo VARCHAR(20),
+    @sueldo INT,
+    @direccion VARCHAR(200)
+AS
+BEGIN
+    UPDATE empleados
+    SET
+        nombres = @nombres,
+        apellidos = @apellidos,
+        dni = @dni,
+        tipo = @tipo,
+        sueldo = @sueldo,
+        direccion = @direccion
+    WHERE idEmpleado = @idEmpleado;
+END;
+/******************************************************************************/
+/*Eliminar Empleado*/
+CREATE PROCEDURE sp_EliminarEmpleado
+    @idEmpleado INT
+AS
+BEGIN
+    DELETE FROM empleados WHERE idEmpleado = @idEmpleado;
+END;
+/******************************************************************************/
+
+											/*Procedimientos Almacenados para Categorías*/
+/******************************************************************************/
+/*Insertar Categoría*/
+CREATE PROCEDURE sp_InsertarCategoria
+    @nombre VARCHAR(50)
+AS
+BEGIN
+    INSERT INTO categorias (nombre)
+    VALUES (@nombre);
+END;
+/******************************************************************************/
+/*Mostrar Categorías*/
+CREATE PROCEDURE sp_MostrarCategorias
+AS
+BEGIN
+    SELECT * FROM categorias;
+END;
+/******************************************************************************/
+/*Editar Categoría*/
+CREATE PROCEDURE sp_EditarCategoria
+    @idCategoria INT,
+    @nombre VARCHAR(50)
+AS
+BEGIN
+    UPDATE categorias
+    SET nombre = @nombre
+    WHERE idCategoria = @idCategoria;
+END;
+/******************************************************************************/
+/*Eliminar Categoría*/
+CREATE PROCEDURE sp_EliminarCategoria
+    @idCategoria INT
+AS
+BEGIN
+    DELETE FROM categorias WHERE idCategoria = @idCategoria;
+END;
+/******************************************************************************/
+
+											/*Procedimientos Almacenados para Clientes*/
+/******************************************************************************/
+/*Insertar Cliente*/
+CREATE PROCEDURE sp_InsertarCliente
+    @nombres VARCHAR(50),
+    @apellidos VARCHAR(50),
+    @dni CHAR(8),
+    @correo VARCHAR(100),
+    @direccion VARCHAR(200)
+AS
+BEGIN
+    INSERT INTO clientes (nombres, apellidos, dni, correo, direccion)
+    VALUES (@nombres, @apellidos, @dni, @correo, @direccion);
+END;
+/******************************************************************************/
+/*Mostrar Clientes*/
+CREATE PROCEDURE sp_MostrarClientes
+AS
+BEGIN
+    SELECT * FROM clientes;
+END;
+/******************************************************************************/
+/*Editar Cliente*/
+CREATE PROCEDURE sp_EditarCliente
+    @idCliente INT,
+    @nombres VARCHAR(50),
+    @apellidos VARCHAR(50),
+    @dni CHAR(8),
+    @correo VARCHAR(100),
+    @direccion VARCHAR(200)
+AS
+BEGIN
+    UPDATE clientes
+    SET
+        nombres = @nombres,
+        apellidos = @apellidos,
+        dni = @dni,
+        correo = @correo,
+        direccion = @direccion
+    WHERE idCliente = @idCliente;
+END;
+/******************************************************************************/
+/*Eliminar Cliente*/
+CREATE PROCEDURE sp_EliminarCliente
+    @idCliente INT
+AS
+BEGIN
+    DELETE FROM clientes WHERE idCliente = @idCliente;
+END;
+/******************************************************************************/
+
+										/*Procedimientos Almacenados para Productos*/
+/******************************************************************************/
+/*Insertar Producto*/
+CREATE PROCEDURE sp_InsertarProducto
+    @nombre VARCHAR(50),
+    @precio DECIMAL(10, 2),
+    @stock INT,
+    @idCategoria INT
+AS
+BEGIN
+    INSERT INTO productos (nombre, precio, stock, idCategoria)
+    VALUES (@nombre, @precio, @stock, @idCategoria);
+END;
+/******************************************************************************/
+/*Mostrar Productos*/
+CREATE PROCEDURE sp_MostrarProductos
+AS
+BEGIN
+    SELECT * FROM productos;
+END;
+/******************************************************************************/
+/*Editar Producto*/
+CREATE PROCEDURE sp_EditarProducto
+    @idProducto INT,
+    @nombre VARCHAR(50),
+    @precio DECIMAL(10, 2),
+    @stock INT,
+    @idCategoria INT
+AS
+BEGIN
+    UPDATE productos
+    SET
+        nombre = @nombre,
+        precio = @precio,
+        stock = @stock,
+        idCategoria = @idCategoria
+    WHERE idProducto = @idProducto;
+END;
+/******************************************************************************/
+/*Eliminar Producto*/
+CREATE PROCEDURE sp_EliminarProducto
+    @idProducto INT
+AS
+BEGIN
+    DELETE FROM productos WHERE idProducto = @idProducto;
+END;
+/******************************************************************************/
+
+											/*Procedimientos Almacenados para Ventas*/
+/******************************************************************************/
+/*Insertar Venta*/
+CREATE PROCEDURE sp_InsertarVenta
+    @cantidad INT,
+    @fechaVenta DATE,
+    @PrecioTotal DECIMAL(10, 2),
+    @idCliente INT,
+    @idProducto INT
+AS
+BEGIN
+    INSERT INTO ventas (cantidad, fechaVenta, PrecioTotal, idCliente, idProducto)
+    VALUES (@cantidad, @fechaVenta, @PrecioTotal, @idCliente, @idProducto);
+END;
+/******************************************************************************/
+/*Mostrar Ventas*/
+CREATE PROCEDURE sp_MostrarVentas
+AS
+BEGIN
+    SELECT v.idVenta, v.cantidad, v.fechaVenta, v.PrecioTotal, c.idCliente, c.nombres AS NombreCliente, p.nombre AS NombreProducto, 
+	p.idProducto FROM ventas v
+    INNER JOIN clientes c ON v.idCliente = c.idCliente
+    INNER JOIN productos p ON v.idProducto = p.idProducto;
+END;
+/******************************************************************************/

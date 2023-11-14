@@ -1,0 +1,50 @@
+																/*TABLAS*/
+
+/*EMPLEADOS*/
+CREATE TABLE empleados(
+idEmpleado int PRIMARY KEY IDENTITY(1,1),
+nombres VARCHAR(50),
+apellidos VARCHAR(50),
+dni char(8) UNIQUE,
+tipo VARCHAR(20),
+sueldo int,
+direccion VARCHAR(200)
+)
+
+/*CATEGORIAS*/
+CREATE TABLE categorias(
+idCategoria int PRIMARY KEY IDENTITY(1,1),
+nombre VARCHAR(50),
+)
+
+/*CLIENTES*/
+CREATE TABLE clientes(
+idCliente int PRIMARY KEY IDENTITY(1,1),
+nombres VARCHAR(50),
+apellidos VARCHAR(50),
+dni char(8) UNIQUE,
+correo VARCHAR(100),
+direccion VARCHAR(200)
+)
+
+/*PRODUCTOS*/
+CREATE TABLE productos(
+idProducto int PRIMARY KEY IDENTITY(1,1),
+nombre VARCHAR(50),
+precio DECIMAL(10, 2),
+stock int,
+idCategoria int,
+FOREIGN KEY (idCategoria) REFERENCES categorias(idCategoria)
+)
+
+/*VENTAS*/
+CREATE TABLE ventas(
+idVenta int PRIMARY KEY IDENTITY(1,1),
+cantidad int,
+fechaVenta DATE,
+PrecioTotal DECIMAL(10, 2),
+idCliente int,
+idProducto int,
+FOREIGN KEY (idCliente) REFERENCES clientes(idCliente),
+FOREIGN KEY (idProducto) REFERENCES productos(idProducto)
+)
